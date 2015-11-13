@@ -1,0 +1,18 @@
+{
+  "serverName": "BigBadBudgetServer",
+  "version": "0.0.1",
+  "host": "127.0.0.1",
+  "port": 8085,
+  "apis": {
+    "yodlee": {
+      "url": "https://some-route.here",
+      "routes": {
+        "account": "/account"
+      },
+      "credentials": {
+        "username": "",
+        "password": ""
+      }
+    }
+  }
+}

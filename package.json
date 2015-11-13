@@ -1,0 +1,38 @@
+{
+  "name": "dontbudge",
+  "version": "1.0.0",
+  "description": "A budgeting app",
+  "main": "server/server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/amhester/DontBudge.git"
+  },
+  "keywords": [
+    "finance",
+    "budget"
+  ],
+  "author": "Alex Hester, Neal Hamilton, Ryan Hanley, Scott Colegrove",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/amhester/DontBudge/issues"
+  },
+  "homepage": "https://github.com/amhester/DontBudge#readme",
+  "dependencies": {
+    "async": "^1.5.0",
+    "bunyan": "^1.5.1",
+    "jsonwebtoken": "^5.4.1",
+    "lodash": "^3.10.1",
+    "mongoose": "^4.2.5",
+    "request": "^2.65.0",
+    "restify": "^4.0.3",
+    "uuid": "^2.0.1"
+  },
+  "devDependencies": {
+    "gulp": "^3.9.0",
+    "mocha": "^2.3.3",
+    "supertest": "^1.1.0"
+  }
+}
