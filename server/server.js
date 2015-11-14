@@ -7,7 +7,7 @@ var restify = require('restify');
 var routes = require('./routes/routes.js');
 
 /* --------------- Other Global Initialization -------- */
-var log = bunyan.createLogger({name: 'com.DontBudge.server.logger'});
+var log = bunyan.createLogger({name:'com.DontBudge.server.logger'});
 
 var server = restify.createServer({
     name: config.name,

@@ -5,13 +5,13 @@
   "port": 8085,
   "apis": {
     "yodlee": {
-      "url": "https://some-route.here",
+      "url": "https://rest.developer.yodlee.com/services/srest/restserver/v1.0",
       "routes": {
         "account": "/account"
       },
       "credentials": {
-        "username": "",
-        "password": ""
+        "username": "sbCobneal.hamilton",
+        "password": "e6f68c27-cb22-428a-a457-928532bcd402"
       }
     }
   },
