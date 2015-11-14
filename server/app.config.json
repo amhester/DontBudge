@@ -18,5 +18,9 @@
         "password":"sbMemneal.hamilton1#123"
       }
     }
+  },
+  "mongo": {
+    "host": "",
+    "port": ""
   }
 }
