@@ -11,13 +11,6 @@ class YodleeService {
 
     }
 
-    doSomething (something, callback) {
-        request('some-http-route-here' + something, function (err, res, body) {
-            callback(err, res, body);
-        });
-    }
-<<<<<<< HEAD
-
 
     getCobSessionToken() {
         var stringBuilder = [];
@@ -34,9 +27,6 @@ class YodleeService {
             return res.body;
         });
     }
-
-=======
->>>>>>> origin/master
 }
 
 module.exports = YodleeService;
