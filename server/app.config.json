@@ -14,5 +14,9 @@
         "password": ""
       }
     }
+  },
+  "mongo": {
+    "host": "",
+    "port": ""
   }
 }
