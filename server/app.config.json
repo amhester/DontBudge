@@ -12,6 +12,10 @@
       "credentials": {
         "username": "sbCobneal.hamilton",
         "password": "e6f68c27-cb22-428a-a457-928532bcd402"
+      },
+      "testUser1": {
+        "username":"sbMemneal.hamilton1",
+        "password":"sbMemneal.hamilton1#123"
       }
     }
   }

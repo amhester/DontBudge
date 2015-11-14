@@ -26,7 +26,14 @@ module.exports.register = function (server) {
 
     server.get('/cobToken', function(req, res, next) {
         console.log('cobToken');
-        res.send(200, yodleeService.getCobSessionToken());
+        yodleeService.getCobSessionToken(function(err, result) {
+            if (err) {
+                res.send(500, "Error getCobSessionToken");
+            }
+            else {
+                res.send(200, result);
+            }
+        });
     });
 
     //other routes can be applied below here following the same pattern as above
