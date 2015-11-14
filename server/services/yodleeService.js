@@ -16,6 +16,7 @@ class YodleeService {
             callback(err, res, body);
         });
     }
+<<<<<<< HEAD
 
 
     getCobSessionToken() {
@@ -34,6 +35,8 @@ class YodleeService {
         });
     }
 
+=======
+>>>>>>> origin/master
 }
 
 module.exports = YodleeService;

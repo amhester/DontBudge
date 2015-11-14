@@ -3,10 +3,14 @@
 var config = require('./../app.config.json');
 var bunyan = require('bunyan');
 var YodleeService = require('./../services/yodleeService.js');
+<<<<<<< HEAD
 var yodleeService = new YodleeService();
+=======
+>>>>>>> origin/master
 
 module.exports = {};
 module.exports.register = function (server) {
+    var yodleeService = new YodleeService();
     //example route
     server.get('/', function (req, res, next) {
         console.log('/');
