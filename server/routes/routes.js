@@ -2,10 +2,11 @@
 
 var config = require('./../app.config.json');
 var bunyan = require('bunyan');
-var yodleeService = require('./../yodleeService.js');
+var YodleeService = require('./../services/yodleeService.js');
 
 module.exports = {};
 module.exports.register = function (server) {
+    var yodleeService = new YodleeService();
     //example route
     server.get('/', function (req, res, next) {
         yodleeService.doSomething('something', function (err, results) {

@@ -4,9 +4,10 @@
 var config = require('./app.config.json');
 var bunyan = require('bunyan');
 var restify = require('restify');
+var routes = require('./routes/routes.js');
 
 /* --------------- Other Global Initialization -------- */
-var log = bunyan.createLogger('com.DontBudge.server.logger');
+var log = bunyan.createLogger({name: 'com.DontBudge.server.logger'});
 
 var server = restify.createServer({
     name: config.name,
@@ -27,7 +28,7 @@ server.use(restify.bodyParser());
 server.use(restify.CORS());
 
 /* --------------- Register Routes Here --------------- */
-
+routes.register(server);
 
 /* --------------- Start the server listening --------- */
 server.listen(config.port, config.host, function () {

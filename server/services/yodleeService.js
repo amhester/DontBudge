@@ -15,3 +15,5 @@ class YodleeService {
         });
     }
 }
+
+module.exports = YodleeService;
