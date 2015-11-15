@@ -64,7 +64,7 @@ class RedisService {
                 log.warn(err);
                 callback(err);
             } else {
-                self._client.expires(key, 100, function (err2, reply2) {
+                self._client.expire(key, 100, function (err2, reply2) {
                     if(err2) {
                         log.warn(err2);
                         callback(err2);
@@ -87,3 +87,5 @@ class RedisService {
         });
     }
 }
+
+module.exports = RedisService;

@@ -4,7 +4,9 @@ var config = require('./../app.config.json');
 var bunyan = require('bunyan');
 var request = require('request');
 var log = bunyan.createLogger({name:'YodleeService'});
+var RedisService = require('./redisService');
 
+var redisService = new RedisService();
 
 class YodleeService {
     constructor () {
@@ -18,30 +20,47 @@ class YodleeService {
         log.info('Request looks like',reqUrl);
 
         request.post(reqUrl, function(err, res, body) {
-            cb(err, JSON.parse(res.body).cobrandConversationCredentials.sessionToken, body);
+            console.log(JSON.parse(res.body).cobrandConversationCredentials.sessionToken);
+            redisService.cacheToken('cobToken', JSON.parse(res.body).cobrandConversationCredentials.sessionToken, function(err, data) {
+                if (err) {
+                    log.warn('Error caching cobToken!');
+                }
+                else {
+                    cb(err, data, body);
+                }
+            });
         });
     }
 
     userLogin(username, password, cb) {
-
-        this.getCobSessionToken(function(err, token) {
-            request.post({
-                url: config.apis.yodlee.url + '/authenticate/login',
-                form: {
-                    login:username,
-                    password:password,
-                    cobSessionToken:token
-                }
-            }, function(err, res, body) {
-                cb(err, JSON.parse(res.body), body);
+        var self = this;
+        redisService.getToken('cobToken', function(err, cobToken) {
+            self.getCobSessionToken(function(err) {
+                request.post({
+                    url: config.apis.yodlee.url + '/authenticate/login',
+                    form: {
+                        login: username,
+                        password: password,
+                        cobSessionToken: cobToken
+                    }
+                }, function(err, res, body) {
+                    redisService.cacheToken('userToken', JSON.parse(res.body).userContext.conversationCredentials.sessionToken, function(err, data) {
+                       if (err) {
+                            log.warn('Error caching userToken');
+                       }
+                       else {
+                           cb(err, data, body);
+                       }
+                    });
+                });
             });
         });
     }
 
     userLogout(cobToken, userToken, cb) {
         var reqUrl = config.apis.yodlee.url;
-        reqUrl += '/jsonsdk/Login/logout?cobSessionToken=' + cobToken;
-        reqUrl += '&userSessionToken=' + userToken;
+        reqUrl += '/jsonsdk/Login/logout?cobSessionToken=' + redisService.getToken('cobToken');
+        reqUrl += '&userSessionToken=' + redisService.getToken('userToken');
 
         request.post({
             url: reqUrl.join('')
@@ -52,7 +71,7 @@ class YodleeService {
 
     isValidUser(cobToken, username, cb) {
         var reqUrl = config.apis.yodlee.url;
-        reqUrl += '/jsonsdk/Login/validateUser?cobSessionToken=' + cobToken;
+        reqUrl += '/jsonsdk/Login/validateUser?cobSessionToken=' + redisService.getToken('cobToken');
         reqUrl += '&userName=' + username;
 
         request.post({
@@ -71,8 +90,8 @@ class YodleeService {
      * */
     getUserResults(cobToken, userToken, options) {
         var reqUrl = config.apis.yodlee.url + '/jsonsdk/TransactionSearchService/executeUserSearchRequest';
-        reqUrl += '?cobSessionToken=' + cobToken;
-        reqUrl += '&userSessionToken' + userToken;
+        reqUrl += '?cobSessionToken=' + redisService.getToken('cobToken');
+        reqUrl += '&userSessionToken' + redisService.getToken('userToken');
 
 
         request.post({
