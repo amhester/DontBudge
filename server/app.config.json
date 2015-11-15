@@ -22,5 +22,8 @@
   "mongo": {
     "host": "",
     "port": ""
+  },
+  "redis": {
+    "port": 6379
   }
 }

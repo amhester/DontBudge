@@ -27,6 +27,7 @@
     "lodash": "^3.10.1",
     "mongoose": "^4.2.5",
     "password-hash": "^1.2.2",
+    "redis": "^2.3.0",
     "request": "^2.65.0",
     "restify": "^4.0.3",
     "uuid": "^2.0.1"
