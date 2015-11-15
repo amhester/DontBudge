@@ -11,8 +11,7 @@ class YodleeService {
     }
 
     getCobSessionToken(cb) {
-        var reqUrl = '';
-        reqUrl += config.apis.yodlee.url;
+        var reqUrl = config.apis.yodlee.url;
         reqUrl += '/authenticate/coblogin?cobrandLogin=' + config.apis.yodlee.credentials.username;
         reqUrl += '&cobrandPassword=' + config.apis.yodlee.credentials.password;
 
@@ -40,12 +39,9 @@ class YodleeService {
     }
 
     userLogout(cobToken, userToken, cb) {
-       var reqUrl = '';
-        reqUrl += config.apis.yodlee.url;
-        reqUrl += '/jsonsdk/Login/logout?cobSessionToken=';
-        reqUrl += cobToken;
-        reqUrl += '&userSessionToken=';
-        reqUrl += userToken;
+        var reqUrl = config.apis.yodlee.url;
+        reqUrl += '/jsonsdk/Login/logout?cobSessionToken=' + cobToken;
+        reqUrl += '&userSessionToken=' + userToken;
 
         request.post({
             url: reqUrl.join('')
@@ -55,8 +51,7 @@ class YodleeService {
     }
 
     isValidUser(cobToken, username, cb) {
-        var reqUrl = '';
-        reqUrl += config.apis.yodlee.url;
+        var reqUrl = config.apis.yodlee.url;
         reqUrl += '/jsonsdk/Login/validateUser?cobSessionToken=' + cobToken;
         reqUrl += '&userName=' + username;
 
