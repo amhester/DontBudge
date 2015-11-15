@@ -36,5 +36,17 @@ module.exports.register = function (server) {
         });
     });
 
+    server.get('/userLogin', function(req, res, next) {
+        yodleeService.userLogin(config.apis.yodlee.testUser1.username, config.apis.yodlee.testUser1.password, function(err, result) {
+            if (err) {
+                res.send(500, "Error userLogin");
+            }
+            else {
+                res.send(200, result);
+            }
+        });
+
+    });
+
     //other routes can be applied below here following the same pattern as above
 };

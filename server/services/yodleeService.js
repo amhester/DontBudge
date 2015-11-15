@@ -3,14 +3,12 @@
 var config = require('./../app.config.json');
 var bunyan = require('bunyan');
 var request = require('request');
-
 var log = bunyan.createLogger({name:'YodleeService'});
 
 
 class YodleeService {
     constructor () {
     }
-
 
     getCobSessionToken(cb) {
         var stringBuilder = [];
@@ -28,15 +26,25 @@ class YodleeService {
         });
     }
 
-    //userLogin(username, password) {
-    //    var stringBuidler = [];
-    //    stringBuidler.push(config.apis.yodlee.url);
-    //    stringBuilder.push('/authenticate/login?login=');
-    //    stringBuidler.push(config.apis.yodlee.testUser1.username);
-    //    stringBuidler.push('&password=');
-    //    stringBuilder.push(config.apis.yodlee.testUser1.password);
-    //    stringBuidler.push();
-    //}
+    userLogin(username, password, cb) {
+
+        this.getCobSessionToken(function(err, token) {
+            request.post({
+                url: config.apis.yodlee.url + '/authenticate/login',
+                form: {
+                    login:username,
+                    password:password,
+                    cobSessionToken:token
+                }
+            }, function(err, res, body) {
+                cb(err, JSON.parse(res.body), body);
+            });
+        });
+    }
+
+    userLogout() {
+        
+    }
 
 }
 
